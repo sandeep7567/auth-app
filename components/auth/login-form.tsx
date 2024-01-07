@@ -79,7 +79,7 @@ export const LoginForm = ({}) => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input {...field} disabled={isPending} />
+                    <Input type="password" {...field} disabled={isPending} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

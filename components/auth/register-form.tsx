@@ -21,7 +21,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { login } from "@/actions/login";
 import { register } from "@/actions/register";
 
 export const RegisterForm = ({}) => {
@@ -98,9 +97,9 @@ export const RegisterForm = ({}) => {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input {...field}
+                      type="password"
                       disabled={isPending}
                       placeholder="*******"
-                      id="password"
                     />
                   </FormControl>
                   <FormMessage />
