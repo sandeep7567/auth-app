@@ -14,15 +14,20 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  // events: {
+  //   async linkAccount({ user }) {
+  //     await db.user.update({data});
+  //   },
+  // },
   callbacks: {
-    async signIn({ user }) {
-      const existinUser = await getUserById(user?.id);
-      if (!existinUser || !existinUser?.emailVerified) {
-        return false;
-      }
+    // async signIn({ user }) {
+    //   const existinUser = await getUserById(user?.id);
+    //   if (!existinUser || !existinUser?.emailVerified) {
+    //     return false;
+    //   }
 
-      return true;
-    },
+    //   return true;
+    // },
     async session({ session, token }) {
       if (token?.sub && session?.user) {
         session.user.id = token.sub;
@@ -47,5 +52,6 @@ export const {
   },
   adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
+  // debug: true,
   ...authConfig,
 });
