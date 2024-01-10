@@ -1,5 +1,4 @@
 import { auth, signOut } from "@/auth";
-import { Button } from "@/components/ui/button";
 
 const SettingsPage = async ({}) => {
   const session = await auth();

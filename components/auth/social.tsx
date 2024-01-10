@@ -16,10 +16,11 @@ interface SocialProps {}
 export const Social: FC<SocialProps> = ({}: SocialProps) => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
+  console.log(callbackUrl);
 
   const onClick = (provider: "google" | "github") => {
     signIn(provider, {
-      callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+      callbackUrl: DEFAULT_LOGIN_REDIRECT,
     });
   };
 

@@ -14,20 +14,32 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  // events: {
-  //   async linkAccount({ user }) {
-  //     await db.user.update({data});
-  //   },
-  // },
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error",
+  },
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user?.id },
+        data: { emailVerified: new Date() }
+      });
+    },
+  },
   callbacks: {
-    // async signIn({ user }) {
-    //   const existinUser = await getUserById(user?.id);
-    //   if (!existinUser || !existinUser?.emailVerified) {
-    //     return false;
-    //   }
+    async signIn({
+      user, account, profile,
+    }) {
+      
+      if (account?.provider !== "credentials") return true;
+   
+      const existingUser = await getUserById(user?.id);
 
-    //   return true;
-    // },
+      // prevent signIn without email verifications
+      if (!existingUser?.emailVerified) return false;
+
+      return true;
+    },
     async session({ session, token }) {
       if (token?.sub && session?.user) {
         session.user.id = token.sub;
@@ -41,11 +53,11 @@ export const {
     async jwt({ token }) {
       if (!token.sub) return token;
 
-      const existinUser = await getUserById(token.sub);
+      const existingUser = await getUserById(token.sub);
 
-      if (!existinUser) return token;
+      if (!existingUser) return token;
 
-      token.role = existinUser?.role;
+      token.role = existingUser?.role;
       // token.sub = ;
       return token;
     },

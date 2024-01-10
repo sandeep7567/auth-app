@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 
 import authConfig from "@/auth.config";
 
-const { auth } = NextAuth(authConfig);
+export const { auth } = NextAuth(authConfig);
 
 import {
   publicRoutes,
@@ -31,7 +31,7 @@ export default auth((req) => {
     }
     return null;
   };
- 
+
   if (!isLoggedIn && !isPublicRoute) {
     return Response.redirect(new URL("/auth/login", nextUrl));
   };
