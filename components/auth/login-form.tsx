@@ -42,6 +42,9 @@ export const LoginForm = ({}) => {
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+    setError("");
+    setSuccess("");
+    
     startTransition(() => {
       login(values).then((data) => {
         setError(data?.error);
@@ -91,7 +94,7 @@ export const LoginForm = ({}) => {
                     size={"sm"}
                     variant={"link"}
                     asChild
-                    className="px-0 font-normal flex justify-end items-center"
+                    className="px-0 w-fit ml-auto font-normal flex justify-end items-center"
                   >
                     <Link href={"/auth/reset"}>
                       Forgot password?

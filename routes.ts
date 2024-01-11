@@ -10,14 +10,15 @@ export const publicRoutes = [
 
 /**
  * An array of routes that are for authentication
- * these route will redirect the logged user to protected resources routes like user profile and settings
+ * These route will redirect the logged in user to protected resources routes like user profile and settings
  * @type {string[]}
- */
+*/
 export const authRoutes = [
   "/auth/login",
   "/auth/register",
   "/auth/reset",
   "/auth/error",
+  "/auth/new-password",
 ];
 
 /**
