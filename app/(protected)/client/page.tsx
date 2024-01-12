@@ -6,7 +6,7 @@ import { useCurrentUser } from "@/hooks/user-current-user";
 const ClientPage = () => {
   const user = useCurrentUser();
   return (
-    <UserInfo user={user} label={"Server component rendering"} />
+    <UserInfo user={user} label={"📱 Client component"} />
   );
 };
 

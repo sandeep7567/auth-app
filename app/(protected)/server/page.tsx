@@ -5,7 +5,7 @@ const ServerPage = async () => {
   const user = await currentUser();
   
   return (
-    <UserInfo user={user} label={"Server component rendering"} />
+    <UserInfo user={user} label={"🤖 Server component"} />
   );
 };
 

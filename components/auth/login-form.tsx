@@ -25,8 +25,10 @@ import { login } from "@/actions/login";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export const LoginForm = ({}) => {
+export const LoginForm = () => {
   const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
+
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
       ? "Email already in use with another provider"
@@ -50,7 +52,7 @@ export const LoginForm = ({}) => {
     setSuccess("");
 
     startTransition(() => {
-      login(values)
+      login(values, callbackUrl)
         .then((data) => {
           if (data?.error) {
             form.reset();
@@ -158,7 +160,7 @@ export const LoginForm = ({}) => {
           <FormSuccess message={success} />
 
           <Button type="submit" disabled={isPending} className="w-full">
-            {showTwoFactor ? "Confim" : "Login" }
+            {showTwoFactor ? "Confim" : "Login"}
           </Button>
         </form>
       </Form>

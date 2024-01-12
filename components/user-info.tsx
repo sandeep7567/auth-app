@@ -1,6 +1,7 @@
 import { ExtendedUser } from "@/next-auth";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
+import Image from "next/image";
 
 interface UserInfoProps {
   user?: ExtendedUser;
@@ -11,7 +12,7 @@ export const UserInfo = ({ user, label }: UserInfoProps) => {
   return (
     <Card className="w-[600px] shadow-md">
       <CardHeader>
-        <p className="text-2xl font-semibold text-center">👨‍💼{label}</p>
+        <p className="text-2xl font-semibold text-center">{label}</p>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex flex-row rounded-lg items-center justify-between border p-3 shadow-sm">
@@ -38,17 +39,17 @@ export const UserInfo = ({ user, label }: UserInfoProps) => {
             {user?.role}
           </p>
         </div>
-        <div className="flex flex-row rounded-lg items-center justify-between border p-3 shadow-sm">
-          <p className="text-sm font-medium">Image</p>
-          <p className="truncate text-xs max-w-[180px] font-mono p-1 bg-slate-100 rounded-md">
-            {user?.image}
-          </p>
-        </div>
+        {user?.image && (
+          <div className="flex flex-row rounded-lg items-center justify-between border p-3 shadow-sm">
+            <p className="text-sm font-medium">Image</p>
+            <p className="truncate text-xs max-w-[180px] font-mono p-1 bg-slate-100 rounded-md">
+              <img src={user?.image} alt="user-pic" width={25} height={25} className="rounded-full aspect-square" />
+            </p>
+          </div>
+        )}
         <div className="flex flex-row rounded-lg items-center justify-between border p-3 shadow-sm">
           <p className="text-sm font-medium">Two Factor Verification</p>
-          <Badge
-            variant={user?.isTwoFactorEnabled ? "success" : "destructive"}
-          >
+          <Badge variant={user?.isTwoFactorEnabled ? "success" : "destructive"}>
             {user?.isTwoFactorEnabled ? "ON" : "OFF"}
           </Badge>
         </div>
