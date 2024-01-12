@@ -11,7 +11,7 @@ export const UserInfo = ({ user, label }: UserInfoProps) => {
   return (
     <Card className="w-[600px] shadow-md">
       <CardHeader>
-        <p className="text-2xl font-semibold text-center">{label}</p>
+        <p className="text-2xl font-semibold text-center">👨‍💼{label}</p>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex flex-row rounded-lg items-center justify-between border p-3 shadow-sm">
